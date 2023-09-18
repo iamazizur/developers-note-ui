@@ -5,7 +5,7 @@ export default function NoteTitle(params) {
     return (
         <>
             <h1>Spring Boot Foreign Key</h1>
-            <NoteDescription/>
+            <NoteDescription />
         </>
     );
 }

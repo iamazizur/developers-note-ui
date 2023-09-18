@@ -38,15 +38,27 @@ export default function CodeComponent(params) {
 
     return (
         <>
-            <CodeMirror
-                value={codeValue}
-                height="400px"
-                className="CodeMirror"
-                fontSize="50px"
-                extensions={[java()]}
-                onChange={onValueChange}
-                theme={'dark'}
-            />
+
+            <div className="card">
+                <div className="card-header bg-dark text-light">
+                    <div className="d-flex justify-content-between align-items-center">
+                        <small className="mb-0">Code</small>
+                        <button className="btn btn-dark">Edit</button>
+                    </div>
+                </div>
+                <div className="card-body p-0">
+                    <CodeMirror
+                        value={codeValue}
+                        height="400px"
+                        className="CodeMirror"
+                        fontSize="50px"
+                        extensions={[java()]}
+                        onChange={onValueChange}
+                        theme={'dark'}
+                    />
+                </div>
+            </div>
+
         </>
     );
 }
