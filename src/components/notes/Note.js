@@ -23,12 +23,13 @@ export default function Note(params) {
                     <CodeComponent />
 
                     <div className='container mt-4'>
-                        <h3>First Create a controller class</h3>
-                        <small>esent the database schema.
-                            A foreign key is a field in one table that is used to establish
-                            a link between two tables, where the foreign key column
-                            in one table references the primary key column in
-                            another table. Here's how you ca</small>
+                        <h3>1. Define Your Entities: </h3>
+                        <small>Let's assume you have two entities: 
+                            Author and Book, and you want to create a 
+                            foreign key relationship between them. 
+                            An Author can have multiple books, 
+                            so you'll add a foreign key in the Book entity 
+                            referencing the Author entity's primary key.</small>
                         <CodeComponent />
                     </div>
 

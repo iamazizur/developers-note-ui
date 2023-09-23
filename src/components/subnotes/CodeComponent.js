@@ -49,7 +49,7 @@ export default function CodeComponent(params) {
                 <div className="card-body p-0">
                     <CodeMirror
                         value={codeValue}
-                        height="400px"
+                        // height="400px"
                         className="CodeMirror"
                         fontSize="50px"
                         extensions={[java()]}
