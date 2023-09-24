@@ -48,6 +48,7 @@ export default function SubNotes({ onSubNoteUpdate,element }) {
             <div className="container d-flex flex-column flex-gap-10 mt-4">
                 <Heading
                     onValueChange={onHeadingChange}
+                    intialValue={element.heading}
                 />
                 <RichDescription
                     onDescriptionChanged={onDescriptionChange}

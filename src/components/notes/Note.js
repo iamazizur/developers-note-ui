@@ -1,37 +1,75 @@
 import React from 'react'
 import './Note.css'
 import CodeComponent from '../subnotes/CodeComponent';
+import NoteDbHandler from '../../db/NoteDbHandler';
+import NoteDTO from '../../models/NoteDTO';
+import RichDescription from '../descriptions/RichDescription';
+import SubNotes from '../subnotes/SubNotes';
+import SubnoteDTO from '../../models/SubnoteDTO';
 
 
-export default function Note(params) {
+
+
+export default function Note({ userDto, note_id }) {
+
+
+
+    const [note, setNote] = React.useState(new NoteDTO())
+
+    React.useEffect(() => {
+        let db = new NoteDbHandler();
+        db.getNotesById(1)
+            .then(val => {
+                console.log('db called..');
+                console.log(val[0]);
+                setNote(val[0])
+            })
+            .catch(console.log)
+    }, [])
+
+
+    let description = <p>Please, wait..</p>
+    if (note.description) {
+        description = <RichDescription
+            initialValue={note.description}
+        />
+    }
+
+
+
+    let subnotes = "Loading..."
+    if (note.subnotes) {
+        subnotes = note.subnotes.map(subnote => {
+            console.log('sub');
+            console.log(subnote);
+            let dto = new SubnoteDTO();
+            dto = {
+                ...subnote
+            }
+            console.log(dto);
+            return (
+                <SubNotes
+                    key={subnote.id}
+                    element={dto}
+                />
+            )
+
+        })
+
+    }
+
+
     return (
         <>
             <div className='card note-wrapper text-start w-75 rounded-2 p-0'>
                 <div className='card-header bg-dark text-light m-0'>
-                    <h1>Spring Boot Foreign Key</h1>
+                    <h1>{note.title ?? "Loading.."}</h1>
                 </div>
                 <div className='card-body'>
-                    <p>In Spring Boot, you can create a
-                        foreign key relationship between two
-                        entities using JPA (Java Persistence API)
-                        to represent the database schema.
-                        A foreign key is a field in one table that is used to establish
-                        a link between two tables, where the foreign key column
-                        in one table references the primary key column in
-                        another table. Here's how you can create a
-                        foreign key relationship in Spring Boot:</p>
-                    <CodeComponent />
 
-                    <div className='container mt-4'>
-                        <h3>1. Define Your Entities: </h3>
-                        <small>Let's assume you have two entities: 
-                            Author and Book, and you want to create a 
-                            foreign key relationship between them. 
-                            An Author can have multiple books, 
-                            so you'll add a foreign key in the Book entity 
-                            referencing the Author entity's primary key.</small>
-                        <CodeComponent />
-                    </div>
+                    {description}
+
+                    {subnotes}
 
 
 

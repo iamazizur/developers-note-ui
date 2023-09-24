@@ -41,6 +41,38 @@ class NoteDbHandler {
 
     }
 
+    validate(userId, noteId) {
+        if (userId === undefined || userId === null || typeof (userId) !== 'number')
+            throw new Error('invalid user Id')
+
+        if (noteId === undefined || noteId === null || typeof (noteId) !== 'number')
+            throw new Error('invalid note Id')
+    }
+    getNotesById(userId) {
+
+        let promise = new Promise(async (resolve, reject) => {
+            try {
+                if (userId === undefined || userId === null || typeof (userId) !== 'number') {
+                    reject('invalid user Id')
+                }
+                let reponse = await fetch('http://localhost:8080/api/v1/notes/getByUser?userId=1', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                    .then(value => value.json())
+                    .then(parsed => resolve(parsed))
+                    .catch(err => reject(err))
+
+
+            } catch (error) {
+                reject(error)
+            }
+        })
+
+        return promise;
+    }
 }
 
 export default NoteDbHandler;
