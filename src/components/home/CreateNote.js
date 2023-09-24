@@ -5,6 +5,7 @@ import CodeComponent from "../subnotes/CodeComponent";
 
 import NoteDTO from "../../models/NoteDTO.js";
 import UserDTO from "../../models/UserDTO.js";
+import NoteDbHandler from "../../db/NoteDbHandler";
 
 
 
@@ -40,10 +41,16 @@ export default function CreateNote(params) {
 
     }
 
-    const onSave = () => {
-        
+    const onSave = async () => {
         console.log(noteDTO);
-        console.log(JSON.stringify(noteDTO));
+        console.log('saving to db..');
+        let dbHandler = new NoteDbHandler();
+        dbHandler.saveNote(noteDTO)
+            .then(response => {
+                console.log(response);
+            }).catch(err => {
+                console.error(err)
+            });
     }
 
     return (
@@ -58,8 +65,8 @@ export default function CreateNote(params) {
                 </div>
                 <div className="card-body">
                     <RichDescription
-                    onDescriptionChanged={onChangeDescription}
-                     />
+                        onDescriptionChanged={onChangeDescription}
+                    />
 
                     <div className="mt-2">
                         <CodeComponent
