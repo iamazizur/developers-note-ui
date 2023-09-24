@@ -1,14 +1,19 @@
 import React from 'react'
 import './Title.css'
-export default function Title() {
+export default function Title({ onChangeTitle }) {
     const [value, setValue] = React.useState('')
 
-    const onChangeHandler = (event) => {
 
+
+    const onChangeHandler = (event) => {
+        let newValue = event.target.value;
         setValue(prev => {
-            let curr = event.target.value;
-            return curr;
+
+            return newValue;
         })
+        if (onChangeTitle !== null || onChangeTitle !== undefined)
+            onChangeTitle(newValue);
+
     }
 
     return (

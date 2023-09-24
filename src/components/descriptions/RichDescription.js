@@ -2,12 +2,15 @@ import React from 'react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-function RichDescription() {
+function RichDescription({onDescriptionChanged}) {
 
     const [text, setText] = React.useState('<p>Your Description goes here..</p><p><br></p><p><br></p><p><br></p>');
 
     const handleChange = (value) => {
         setText(prev => value);
+
+        if(onDescriptionChanged !== null || onDescriptionChanged !== undefined)
+            onDescriptionChanged(value);
     };
 
     const modules = {
@@ -16,6 +19,7 @@ function RichDescription() {
             ['bold', 'italic', 'underline'],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
             ['link'],
+            ['code']
         ]
     }
 
