@@ -4,13 +4,10 @@ import 'react-quill/dist/quill.snow.css';
 
 function RichDescription() {
 
-    const [text, setText] = React.useState('<p>Your Description goes here..</p>');
+    const [text, setText] = React.useState('<p>Your Description goes here..</p><p><br></p><p><br></p><p><br></p>');
 
     const handleChange = (value) => {
-
-        setText(prev => {
-            return value;
-        });
+        setText(prev => value);
     };
 
     const modules = {
@@ -24,15 +21,11 @@ function RichDescription() {
 
     return (
         <>
-            <div>RichDescription</div>
-            <div>
-                <ReactQuill
-                    value={text}
-                    onChange={handleChange}
-                    modules={modules}
-                />
-            </div>
-
+            <ReactQuill
+                value={text}
+                onChange={handleChange}
+                modules={modules}
+            />
         </>
 
     )

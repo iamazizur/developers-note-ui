@@ -27,14 +27,15 @@ public class NoteController{
 
 export default function CodeComponent(params) {
 
-
-
-
+    let initialCodeValue = params.initialCodeValue;
 
     const onValueChange = (value) => {
         console.log(value);
     }
-    let codeValue = x;
+    if (initialCodeValue === null || initialCodeValue === undefined) {
+        initialCodeValue = x;
+    }
+
 
     return (
         <>
@@ -48,7 +49,7 @@ export default function CodeComponent(params) {
                 </div>
                 <div className="card-body p-0">
                     <CodeMirror
-                        value={codeValue}
+                        value={initialCodeValue}
                         // height="400px"
                         className="CodeMirror"
                         fontSize="50px"
