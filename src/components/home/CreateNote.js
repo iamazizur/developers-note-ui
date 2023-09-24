@@ -1,11 +1,11 @@
 import React from "react";
 import Title from "../Title";
 import RichDescription from "../descriptions/RichDescription";
-import CodeComponent from "../subnotes/CodeComponent";
 
 import NoteDTO from "../../models/NoteDTO.js";
 import UserDTO from "../../models/UserDTO.js";
 import NoteDbHandler from "../../db/NoteDbHandler";
+import SubNotes from "../subnotes/SubNotes";
 
 
 
@@ -15,15 +15,9 @@ initialNoteDto.user = user;
 
 export default function CreateNote(params) {
 
-    const [noteDTO, setNoteDTO] = React.useState(initialNoteDto)
+    const [noteDTO, setNoteDTO] = React.useState(initialNoteDto);
+    const [subnotes, setSubnotes] = React.useState([]);
 
-    const initialCodeValue = `
-    public class Main{
-        public static void main(String[] args){
-            System.out.println("Hello World!");
-        }
-    }
-    `
 
     const onChangeTitle = (title) => {
         setNoteDTO(prev => {
@@ -41,7 +35,7 @@ export default function CreateNote(params) {
 
     }
 
-    const onSave = async () => {
+    const onSave = () => {
         console.log(noteDTO);
         console.log('saving to db..');
         let dbHandler = new NoteDbHandler();
@@ -51,6 +45,21 @@ export default function CreateNote(params) {
             }).catch(err => {
                 console.error(err)
             });
+    }
+
+    const addSubnoteSection = () => {
+
+        setSubnotes(prev => {
+
+            const element =
+                <div className="mt-4" key={prev.length + 1} >
+                    <SubNotes />
+                </div>
+
+
+            return [...prev, element];
+
+        })
     }
 
     return (
@@ -68,16 +77,19 @@ export default function CreateNote(params) {
                         onDescriptionChanged={onChangeDescription}
                     />
 
+                    {subnotes}
+
+                    {/* 
                     <div className="mt-2">
-                        <CodeComponent
-                            initialCodeValue={initialCodeValue}
-                        />
-                    </div>
+
+                        <SubNotes />
+
+                    </div> */}
 
                 </div>
 
                 <div className="d-grid gap-2 mt-2">
-                    <button className="btn btn-dark" type="button">Add Section</button>
+                    <button className="btn btn-dark" type="button" onClick={addSubnoteSection}>Add Section</button>
                 </div>
 
                 <button type="button" className="btn btn-primary" onClick={onSave} >Save</button>

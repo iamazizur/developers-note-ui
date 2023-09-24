@@ -6,11 +6,14 @@ function RichDescription({onDescriptionChanged}) {
 
     const [text, setText] = React.useState('<p>Your Description goes here..</p><p><br></p><p><br></p><p><br></p>');
 
+
     const handleChange = (value) => {
         setText(prev => value);
 
-        if(onDescriptionChanged !== null || onDescriptionChanged !== undefined)
+        if( onDescriptionChanged !== undefined && onDescriptionChanged !== null){
             onDescriptionChanged(value);
+
+        }
     };
 
     const modules = {
