@@ -69,6 +69,7 @@ export default function CreateNote(params) {
                     onSubNoteUpdate={subnoteUpdateHandler}
                     key={prev.length + 1}
                     element={new SubnoteDTO()}
+                    
                 />
 
 
