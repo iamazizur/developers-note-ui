@@ -6,6 +6,7 @@ import NoteDTO from "../../models/NoteDTO.js";
 import UserDTO from "../../models/UserDTO.js";
 import NoteDbHandler from "../../db/NoteDbHandler";
 import SubNotes from "../subnotes/SubNotes";
+import SubnoteDTO from "../../models/SubnoteDTO";
 
 
 
@@ -36,7 +37,16 @@ export default function CreateNote(params) {
     }
 
     const onSave = () => {
+
+        if(subnotes?.length > 0){
+           let notes = subnotes.map(subnote => subnote.props.element)
+           noteDTO.subnotes = notes;
+        }
         console.log(noteDTO);
+        console.log(JSON.stringify(noteDTO));
+        // console.log(subnotes);
+
+        return;
         console.log('saving to db..');
         let dbHandler = new NoteDbHandler();
         dbHandler.saveNote(noteDTO)
@@ -47,15 +57,25 @@ export default function CreateNote(params) {
             });
     }
 
+    const subnoteUpdateHandler = (subnote) => {
+    }
+
     const addSubnoteSection = () => {
 
         setSubnotes(prev => {
 
             const element =
-                <div className="mt-4" key={prev.length + 1} >
-                    <SubNotes />
-                </div>
+                <SubNotes
+                    onSubNoteUpdate={subnoteUpdateHandler}
+                    key={prev.length + 1}
+                    element={new SubnoteDTO()}
+                />
 
+
+            for (let index = 0; index < prev.length; index++) {
+                const element = prev[index];
+                console.log(element.props.element);
+            }
 
             return [...prev, element];
 

@@ -4,6 +4,7 @@ class NoteDTO {
     user;
     title;
     description;
+    subnotes;
 
 
 }

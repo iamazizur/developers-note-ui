@@ -25,12 +25,15 @@ public class NoteController{
 
 
 
-export default function CodeComponent(params) {
+export default function CodeComponent({ initialCodeValue, onCodeChange }) {
 
-    let initialCodeValue = params.initialCodeValue;
 
-    const onValueChange = (value) => {
-        console.log(value);
+
+    const onChange = (value) => {
+
+        if (onCodeChange !== undefined && onCodeChange !== null) {
+            onCodeChange(value)
+        }
     }
     if (initialCodeValue === null || initialCodeValue === undefined) {
         initialCodeValue = x;
@@ -54,7 +57,7 @@ export default function CodeComponent(params) {
                         className="CodeMirror"
                         fontSize="50px"
                         extensions={[java()]}
-                        onChange={onValueChange}
+                        onChange={onChange}
                         theme={'dark'}
                     />
                 </div>
