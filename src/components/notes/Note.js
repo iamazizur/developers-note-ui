@@ -7,6 +7,7 @@ import NoteDTO from '../../models/NoteDTO';
 import RichDescription from '../descriptions/RichDescription';
 import SubNotes from '../subnotes/SubNotes';
 import SubnoteDTO from '../../models/SubnoteDTO';
+import ReadOnlySubnotes from '../readyonly-components/ReadOnlySubnotes';
 
 
 
@@ -48,19 +49,8 @@ export default function Note({ userDto, note_id }) {
     let subnotes = "Loading..."
     if (note.subnotes) {
         subnotes = note.subnotes.map(subnote => {
-
-            console.log('sub');
-            console.log(subnote);
-            let dto = new SubnoteDTO();
-            dto = {
-                ...subnote
-            }
-            console.log(dto);
             return (
-                <SubNotes
-                    key={subnote.id}
-                    element={dto}
-                />
+                <ReadOnlySubnotes subnoteDTO={subnote} key={subnote.id} />
             )
 
         })
