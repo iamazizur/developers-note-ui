@@ -1,35 +1,20 @@
 import React from 'react'
 import './Note.css'
-
-import CodeComponent from '../subnotes/CodeComponent';
 import NoteDbHandler from '../../db/NoteDbHandler';
 import NoteDTO from '../../models/NoteDTO';
-import RichDescription from '../descriptions/RichDescription';
-import SubNotes from '../subnotes/SubNotes';
-import SubnoteDTO from '../../models/SubnoteDTO';
 import ReadOnlySubnotes from '../readyonly-components/ReadOnlySubnotes';
 import ReadOnlyDescription from '../readyonly-components/ReadOnlyDescription';
 
 
-
-
-
 export default function Note({ userDto, note_id }) {
 
-
-
     const [note, setNote] = React.useState(new NoteDTO())
-
-
 
     React.useEffect(() => {
         let db = new NoteDbHandler();
         db.getNotesById(1)
             .then(val => {
                 console.log('db called..');
-
-                console.log(val[0]);
-
                 setNote(val[0])
             })
             .catch(console.log)
