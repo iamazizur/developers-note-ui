@@ -25,7 +25,8 @@ function RichDescription({ onDescriptionChanged, initialValue, readOnly = true }
         ['link'],
         ['code']
     ]
-    if (readOnly === true)
+
+    if (readOnly)
         toolbar = false;
 
     const modules = {

@@ -1,9 +1,13 @@
 import React from 'react'
 import './Note.css'
+
+import CodeComponent from '../subnotes/CodeComponent';
 import NoteDbHandler from '../../db/NoteDbHandler';
 import NoteDTO from '../../models/NoteDTO';
-import ReadOnlySubnotes from '../readyonly-components/ReadOnlySubnotes';
-import ReadOnlyDescription from '../readyonly-components/ReadOnlyDescription';
+import RichDescription from '../descriptions/RichDescription';
+import SubNotes from '../subnotes/SubNotes';
+import SubnoteDTO from '../../models/SubnoteDTO';
+
 
 
 
@@ -16,23 +20,27 @@ export default function Note({ userDto, note_id }) {
 
 
 
-
-
     React.useEffect(() => {
         let db = new NoteDbHandler();
         db.getNotesById(1)
             .then(val => {
                 console.log('db called..');
+
+                console.log(val[0]);
+
                 setNote(val[0])
             })
             .catch(console.log)
     }, [])
 
 
-    let description = <p>loading...</p>
+
+    let description = <p>Please, wait..</p>
     if (note.description) {
-        description = <ReadOnlyDescription description={note.description} />
-        
+        description = <RichDescription
+            initialValue={note.description}
+        />
+
     }
 
 
@@ -41,10 +49,18 @@ export default function Note({ userDto, note_id }) {
     if (note.subnotes) {
         subnotes = note.subnotes.map(subnote => {
 
-            
-
+            console.log('sub');
+            console.log(subnote);
+            let dto = new SubnoteDTO();
+            dto = {
+                ...subnote
+            }
+            console.log(dto);
             return (
-                <ReadOnlySubnotes subnoteDTO={subnote} key={subnote.id} />
+                <SubNotes
+                    key={subnote.id}
+                    element={dto}
+                />
             )
 
         })
