@@ -17,7 +17,6 @@ function App() {
               <Link to="/sample">Sample</Link>
               <Link to="/create">Create</Link>
               <Link to="/subnotes">Subnotes</Link>
-
             </nav>
             <Routes>
               <Route path="/sample" element={<Sample />} />
