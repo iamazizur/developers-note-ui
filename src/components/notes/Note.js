@@ -1,5 +1,6 @@
 import React from 'react'
 import './Note.css'
+
 import CodeComponent from '../subnotes/CodeComponent';
 import NoteDbHandler from '../../db/NoteDbHandler';
 import NoteDTO from '../../models/NoteDTO';
@@ -10,22 +11,28 @@ import SubnoteDTO from '../../models/SubnoteDTO';
 
 
 
+
 export default function Note({ userDto, note_id }) {
 
 
 
     const [note, setNote] = React.useState(new NoteDTO())
 
+
+
     React.useEffect(() => {
         let db = new NoteDbHandler();
         db.getNotesById(1)
             .then(val => {
                 console.log('db called..');
+
                 console.log(val[0]);
+
                 setNote(val[0])
             })
             .catch(console.log)
     }, [])
+
 
 
     let description = <p>Please, wait..</p>
@@ -33,6 +40,7 @@ export default function Note({ userDto, note_id }) {
         description = <RichDescription
             initialValue={note.description}
         />
+
     }
 
 
@@ -40,6 +48,7 @@ export default function Note({ userDto, note_id }) {
     let subnotes = "Loading..."
     if (note.subnotes) {
         subnotes = note.subnotes.map(subnote => {
+
             console.log('sub');
             console.log(subnote);
             let dto = new SubnoteDTO();
@@ -61,6 +70,7 @@ export default function Note({ userDto, note_id }) {
 
     return (
         <>
+
             <div className='card note-wrapper text-start w-75 rounded-2 p-0'>
                 <div className='card-header bg-dark text-light m-0'>
                     <h1>{note.title ?? "Loading.."}</h1>

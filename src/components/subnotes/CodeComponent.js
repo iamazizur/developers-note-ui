@@ -53,12 +53,13 @@ export default function CodeComponent({ initialCodeValue, onCodeChange }) {
                 <div className="card-body p-0">
                     <CodeMirror
                         value={initialCodeValue}
-                        // height="400px"
                         className="CodeMirror"
-                        fontSize="50px"
                         extensions={[java()]}
                         onChange={onChange}
                         theme={'dark'}
+                        editable={false}
+                        readOnly={true}
+
                     />
                 </div>
             </div>

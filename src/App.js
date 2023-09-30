@@ -13,15 +13,14 @@ function App() {
         <header className="App-header p-3">
           <Router>
             <nav>
-              <Link to="/">Sample</Link>
-              <Link to="/home">Home</Link>
+              <Link to="/">Home</Link>
+              <Link to="/sample">Sample</Link>
               <Link to="/create">Create</Link>
               <Link to="/subnotes">Subnotes</Link>
-
             </nav>
             <Routes>
-              <Route path="/" element={<Sample />} />
-              <Route path="/home" element={<Home />} />
+              <Route path="/sample" element={<Sample />} />
+              <Route path="/" element={<Home />} />
               <Route path='/create' element={<CreateNote />} />
               <Route path='/subnotes' element={<SubNotes />} />
             </Routes>

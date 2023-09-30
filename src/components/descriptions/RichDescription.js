@@ -25,6 +25,7 @@ function RichDescription({ onDescriptionChanged, initialValue, readOnly = true }
         ['link'],
         ['code']
     ]
+
     if (readOnly)
         toolbar = false;
 

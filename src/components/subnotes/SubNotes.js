@@ -13,12 +13,12 @@ const initialCodeValue = `
     `
 
 
-export default function SubNotes({ onSubNoteUpdate,element }) {
+export default function SubNotes({ onSubNoteUpdate, element }) {
     const [subnoteDto, setSubnoteDto] = React.useState(element)
 
     const updateSubnote = () => {
         setSubnoteDto(subnoteDto);
-        
+
         if (onSubNoteUpdate !== undefined && onSubNoteUpdate !== null)
             onSubNoteUpdate(subnoteDto)
 
@@ -52,6 +52,7 @@ export default function SubNotes({ onSubNoteUpdate,element }) {
                 />
                 <RichDescription
                     onDescriptionChanged={onDescriptionChange}
+                    readOnly={false}
                 />
                 <CodeComponent
                     initialCodeValue={initialCodeValue}
