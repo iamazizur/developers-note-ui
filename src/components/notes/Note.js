@@ -8,6 +8,7 @@ import RichDescription from '../descriptions/RichDescription';
 import SubNotes from '../subnotes/SubNotes';
 import SubnoteDTO from '../../models/SubnoteDTO';
 import ReadOnlySubnotes from '../readyonly-components/ReadOnlySubnotes';
+import ReadOnlyDescription from '../readyonly-components/ReadOnlyDescription';
 
 
 
@@ -38,10 +39,7 @@ export default function Note({ userDto, note_id }) {
 
     let description = <p>Please, wait..</p>
     if (note.description) {
-        description = <RichDescription
-            initialValue={note.description}
-        />
-
+        description = <ReadOnlyDescription description={note.description} />
     }
 
 
